@@ -1,10 +1,8 @@
 # Open the file in read mode
 import subprocess
-def extArrival(fileName = ' ', i = 0):
-         with open(fileName, 'r') as file:
+def extArrival(i = 0):
+         with open(f'in/{i}.txt', 'r') as file:
               lines = file.readlines() 
-              with open(f"in/{i}.txt", 'w') as w:
-                  w.write("\n".join(lines)) 
               nlines = 0
               for i in range(len(lines)):
                   l = lines[i].strip()
@@ -20,7 +18,7 @@ def getArrival(start = 0, end = 0, source = ' '):
   out.append(f"DROP TABLE IF EXISTS {table};")
   out.append(f"create table {table}(ID INT, arrivalTime FLOAT, source TEXT, statement INT);")
   for i in range(start,end):   
-    arrivalTime = extArrival(i= i , fileName = f'/mnt/c/btreeBlock-main/verilog/{source}/vivado/reports/statement/{i}/timing_summary.rpt')
+    arrivalTime = extArrival(i= i)
     out.append(f"insert into {table}(ID, arrivalTime, source, statement) values({i}, {arrivalTime}, '{source}',{i});")
   out.append(f"SELECT * FROM {table};")
   with open('sql.sql', 'w') as sqlFile:

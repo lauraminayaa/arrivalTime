@@ -13,4 +13,4 @@ jobs:
          ref: 'main'
     
     - name: Run Python Script
-      run: python read.py 
+      run: python3 read.py 
